@@ -17,11 +17,12 @@ public class Enemy : MonoBehaviour
   [SerializeField] GameObject laserPrefab;
 
   [Header("Effects")]
+  [SerializeField] GameObject deathVFX;
+  [SerializeField] float durationOfExplosion = 0.5f;
   [SerializeField] AudioClip deathSound;
   [SerializeField] [Range(0, 1)] float deathSoundVolume = 0.75f;
   [SerializeField] AudioClip shootSound;
   [SerializeField] [Range(0, 1)] float shootSoundVolume = 0.25f;
-
 
 
   // Start is called before the first frame update
@@ -78,7 +79,11 @@ public class Enemy : MonoBehaviour
   {
     FindObjectOfType<GameSession>().AddToScore(score);
 
-    Destroy(gameObject); // Destroy the aircraft itself 
+    Destroy(gameObject); // Destroy the aircraft itself
+
+    GameObject explosion = Instantiate(deathVFX, transform.position, transform.rotation);
+    Destroy(explosion, durationOfExplosion);
+
     AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position, deathSoundVolume);
   }
 }

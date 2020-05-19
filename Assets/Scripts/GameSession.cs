@@ -15,7 +15,7 @@ public class GameSession : MonoBehaviour
     int numberOfSession = FindObjectsOfType<GameSession>().Length;
     if (numberOfSession > 1)
     {
-      // Trying to initialize a new Game Session every scene
+      // Trying to initialize a new Game Session on every scene
       Destroy(gameObject);
     }
     else
